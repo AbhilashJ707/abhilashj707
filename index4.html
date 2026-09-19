@@ -1,0 +1,1865 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Abhilash Johny - QA Engineer and Team Lead. 4+ years in enterprise QA, Playwright automation, and testing 20+ game titles across PC, console, mobile and XR.">
+  <meta name="theme-color" content="#080a16">
+  <title>Abhilash Johny - QA Engineer &amp; Team Lead</title>
+  
+  <!-- Gaming & Tech Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:ital,wght@0,400;0,600;0,700;1,700&family=JetBrains+Mono:wght@400;600;700;800&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* ==========================================================================
+       GAME DESIGN SYSTEM & THEMES (STRICTLY PRESERVING ALL CONTENT)
+       ========================================================================== */
+    :root {
+      color-scheme: dark;
+      --paper: #060814;
+      --white: #0e1326;
+      --ink: #f0f3fc;
+      --muted: #94a3b8;
+      --green: #00f0ff;
+      --lime: #00f0ff;
+      --accent: #00f0ff;
+      --rgb: 0, 240, 255;
+      --secondary: #ff007f;
+      --secondary-rgb: 255, 0, 127;
+      --gold: #ffe600;
+      --line: rgba(0, 240, 255, 0.22);
+      --line-bright: rgba(0, 240, 255, 0.55);
+      --soft: #141a33;
+      --radius: 12px;
+      
+      --font-display: 'Chakra Petch', system-ui, -apple-system, sans-serif;
+      --font-body: 'Rajdhani', system-ui, -apple-system, sans-serif;
+      --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, monospace;
+      
+      --glow-sm: 0 0 10px rgba(var(--rgb), 0.35);
+      --glow-md: 0 0 22px rgba(var(--rgb), 0.55);
+      --glow-lg: 0 0 38px rgba(var(--rgb), 0.75);
+      --clip-chamfer: polygon(14px 0, 100% 0, 100% calc(100% - 14px), calc(100% - 14px) 100%, 0 100%, 0 14px);
+      --clip-button: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
+      --clip-pill: polygon(6px 0, 100% 0, calc(100% - 6px) 100%, 0 100%);
+    }
+
+    /* UNIVERSE THEMES */
+    :root[data-universe="games"] {
+      --paper: #0b0514;
+      --accent: #ff007f;
+      --rgb: 255, 0, 127;
+      --green: #ff007f;
+      --lime: #ff007f;
+      --secondary: #ffe600;
+      --secondary-rgb: 255, 230, 0;
+      --line: rgba(255, 0, 127, 0.25);
+      --line-bright: rgba(255, 0, 127, 0.65);
+    }
+    
+    :root[data-universe="xr"] {
+      --paper: #070514;
+      --accent: #b99aff;
+      --rgb: 185, 154, 255;
+      --green: #b99aff;
+      --lime: #b99aff;
+      --secondary: #00f0ff;
+      --secondary-rgb: 0, 240, 255;
+      --line: rgba(185, 154, 255, 0.25);
+      --line-bright: rgba(185, 154, 255, 0.65);
+    }
+
+    /* ==========================================================================
+       RESET & BASE SETUP
+       ========================================================================== */
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; scroll-padding-top: 100px; }
+    body {
+      margin: 0;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: var(--font-body);
+      font-size: 17px;
+      line-height: 1.6;
+      overflow-x: clip;
+      position: relative;
+      isolation: isolate;
+      --motion-state: paused;
+    }
+    html.motion-enabled body { --motion-state: running; }
+
+    a { color: inherit; text-underline-offset: 4px; }
+    button { font: inherit; cursor: pointer; }
+    a, button, summary { -webkit-tap-highlight-color: transparent; }
+    :focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; box-shadow: var(--glow-sm); }
+    ::selection { background: var(--accent); color: #080a16; text-shadow: none; }
+    
+    h1, h2, h3, p { margin: 0; }
+    h1, h2, h3 { font-family: var(--font-display); line-height: 1.1; letter-spacing: -0.02em; text-transform: uppercase; }
+    h2 { font-size: clamp(2.2rem, 4.5vw, 3.5rem); font-weight: 700; color: #fff; }
+    h3 { font-size: 1.35rem; font-weight: 700; }
+    [hidden] { display: none !important; }
+
+    .container { width: min(1200px, calc(100% - 56px)); margin-inline: auto; }
+    .skip { position: fixed; top: 12px; left: 16px; z-index: 100; padding: 12px 20px; background: var(--accent); color: #080a16; font-weight: 700; font-family: var(--font-mono); transform: translateY(-160%); }
+    .skip:focus { transform: none; }
+
+    /* ==========================================================================
+       TOP HEADER HUD
+       ========================================================================== */
+    .header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      background: rgba(6, 8, 20, 0.92);
+      backdrop-filter: blur(18px);
+      border-bottom: 2px solid var(--line);
+      box-shadow: 0 4px 25px rgba(0,0,0,0.7), 0 0 15px rgba(var(--rgb), 0.15);
+      overflow: hidden;
+    }
+    .header::before {
+      content: "🎮 · 👾 · 🕹 · ⚡ · 🎮 · 👾 · 🕹 · ⚡ · 🎮 · 👾 · 🕹 · ⚡ · 🎮 · 👾 · 🕹 · ⚡ 🎮 · 👾 · 🕹 · ⚡ · 🎮 · 👾 · 🕹 · ⚡ · 🎮 · 👾 · 🕹 · ⚡ · 🎮 · 👾 · 🕹 · ⚡";
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      white-space: nowrap;
+      font-size: 18px;
+      opacity: 0.08;
+      letter-spacing: 0.35em;
+      animation: header-marquee 44s linear infinite;
+      animation-play-state: var(--motion-state);
+      pointer-events: none;
+    }
+    @keyframes header-marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+    .nav { position: relative; z-index: 1; display: flex; align-items: center; justify-content: space-between; min-height: 80px; gap: 24px; }
+    .brand { display: flex; align-items: center; gap: 14px; text-decoration: none; font-family: var(--font-display); font-size: 1.05rem; font-weight: 700; letter-spacing: 0.04em; }
+    
+    .monogram {
+      display: grid;
+      place-items: center;
+      width: 44px;
+      height: 44px;
+      clip-path: var(--clip-button);
+      background: linear-gradient(135deg, var(--accent), var(--secondary));
+      color: #080a16;
+      font-family: var(--font-display);
+      font-size: 0.95rem;
+      font-weight: 800;
+      box-shadow: var(--glow-sm);
+    }
+    .brand small { display: block; color: var(--muted); font-family: var(--font-mono); font-weight: 500; font-size: 0.72rem; margin-top: 3px; letter-spacing: 0.06em; }
+
+    .nav-links { display: flex; align-items: center; gap: 28px; list-style: none; padding: 0; margin: 0; }
+    .nav-links a {
+      text-decoration: none;
+      font-family: var(--font-display);
+      font-size: 0.9rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--muted);
+      position: relative;
+      transition: color 0.2s, text-shadow 0.2s;
+    }
+    .nav-links a::after {
+      content: "";
+      position: absolute;
+      height: 2px;
+      bottom: -6px;
+      left: 0;
+      right: 0;
+      background: var(--accent);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.25s;
+      box-shadow: 0 0 8px var(--accent);
+    }
+    .nav-links a:hover, .nav-links a:focus-visible { color: var(--accent); text-shadow: 0 0 10px var(--accent); text-decoration: none; }
+    .nav-links a:hover::after, .nav-links a:focus-visible::after { transform: scaleX(1); }
+
+    .nav-links .nav-contact {
+      padding: 9px 20px;
+      border: 1px solid var(--accent);
+      background: rgba(var(--rgb), 0.08);
+      color: var(--accent);
+      clip-path: var(--clip-button);
+      box-shadow: 0 0 12px rgba(var(--rgb), 0.2);
+    }
+    .nav-links .nav-contact:hover {
+      background: var(--accent);
+      color: #080a16;
+      box-shadow: var(--glow-md);
+    }
+
+    .menu-button {
+      display: none;
+      padding: 9px 16px;
+      background: #0e1326;
+      border: 1px solid var(--line-bright);
+      color: var(--accent);
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      border-radius: 4px;
+    }
+
+    /* ==========================================================================
+       HERO BATTLESTATION HUD
+       ========================================================================== */
+    .hero { padding: 48px 0 0; }
+    .hero-grid { display: grid; grid-template-columns: 1.25fr 1fr; gap: 50px; align-items: center; }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 18px;
+      padding: 4px 10px;
+      background: rgba(var(--rgb), 0.08);
+      border-left: 3px solid var(--accent);
+      clip-path: var(--clip-pill);
+    }
+    .eyebrow::before { content: "⚡"; font-size: 0.75rem; color: var(--gold); }
+
+    .availability {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      border: 1px solid rgba(var(--rgb), 0.4);
+      background: rgba(14, 19, 38, 0.85);
+      clip-path: var(--clip-pill);
+      padding: 7px 16px;
+      color: var(--accent);
+      font-family: var(--font-mono);
+      font-size: 0.76rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      margin-bottom: 24px;
+      box-shadow: 0 0 15px rgba(var(--rgb), 0.15);
+    }
+    .availability::before {
+      content: "";
+      width: 8px;
+      height: 8px;
+      background: #39ff14;
+      border-radius: 50%;
+      box-shadow: 0 0 10px #39ff14;
+      animation: pulse-beacon 1.6s infinite;
+    }
+    @keyframes pulse-beacon { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.35; transform: scale(0.85); } }
+
+    .intro { color: var(--accent); font-family: var(--font-mono); font-size: 0.95rem; font-weight: 600; margin-bottom: 12px; }
+
+    h1 {
+      font-size: clamp(3.2rem, 6.4vw, 5.4rem);
+      font-weight: 700;
+      letter-spacing: -0.04em;
+      line-height: 1.02;
+      color: #fff;
+    }
+    h1 span {
+      display: block;
+      background: linear-gradient(105deg, var(--accent), var(--secondary), #ffffff, var(--accent));
+      background-size: 250% 100%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      filter: drop-shadow(0 0 18px rgba(var(--rgb), 0.4));
+      animation: spectrum 7s ease-in-out infinite alternate;
+      animation-play-state: var(--motion-state);
+    }
+    @keyframes spectrum { to { background-position: 100% 50%; } }
+
+    .hero-copy {
+      margin-top: 22px;
+      max-width: 560px;
+      color: var(--muted);
+      font-size: 1.12rem;
+      line-height: 1.65;
+    }
+    .hero-copy strong { color: #fff; font-weight: 600; }
+
+    .actions { display: flex; gap: 14px; flex-wrap: wrap; margin-top: 28px; }
+    
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      clip-path: var(--clip-button);
+      padding: 13px 26px;
+      text-decoration: none;
+      border: 1px solid var(--line-bright);
+      background: rgba(14, 19, 38, 0.9);
+      color: #fff;
+      font-family: var(--font-display);
+      font-size: 0.9rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      position: relative;
+      overflow: hidden;
+      transition: all 0.25s ease;
+      cursor: pointer;
+    }
+    .button.primary {
+      background: linear-gradient(135deg, var(--accent), #00a2ff);
+      color: #080a16;
+      border-color: var(--accent);
+      box-shadow: 0 0 25px rgba(var(--rgb), 0.45);
+    }
+    .button.primary:hover {
+      background: #fff;
+      color: #080a16;
+      box-shadow: 0 0 35px var(--accent);
+      transform: translateY(-2px);
+    }
+    .button:not(.primary):hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      background: rgba(var(--rgb), 0.12);
+      box-shadow: var(--glow-sm);
+      transform: translateY(-2px);
+    }
+    .button::after {
+      content: "";
+      position: absolute;
+      top: -100%;
+      bottom: -100%;
+      width: 30%;
+      left: -70%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+      transform: skewX(-25deg);
+      transition: left 0.65s;
+      pointer-events: none;
+    }
+    .button:hover::after, .button:focus-visible::after { left: 150%; }
+
+    .location {
+      color: var(--muted);
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      margin-top: 22px;
+    }
+    .play-hint {
+      color: var(--muted);
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      margin-top: 14px;
+    }
+    .pulse-button {
+      padding: 9px 18px;
+      margin-top: 10px;
+      font-size: 0.78rem;
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+    .pulse-button:disabled { opacity: 0.5; cursor: default; }
+
+    /* ==========================================================================
+       PROFILE CARD / 3D CYBER REACTOR
+       ========================================================================== */
+    .profile-card {
+      position: relative;
+      border: 1px solid var(--line-bright);
+      border-radius: var(--radius);
+      padding: 26px;
+      background: linear-gradient(145deg, rgba(20, 25, 48, 0.95), rgba(10, 13, 30, 0.95));
+      color: #fff;
+      box-shadow: 0 16px 45px rgba(0, 0, 0, 0.7), inset 0 0 25px rgba(var(--rgb), 0.06);
+      backdrop-filter: blur(16px);
+      overflow: hidden;
+    }
+    .card-top {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      align-items: center;
+      color: var(--muted);
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 12px;
+    }
+    .card-top span:last-child { color: var(--accent); }
+
+    .quality-art {
+      position: relative;
+      display: grid;
+      place-items: center;
+      height: 290px;
+      overflow: hidden;
+      margin: 10px 0;
+      background: radial-gradient(circle at center, rgba(var(--rgb), 0.15) 0%, transparent 68%);
+      perspective: 650px;
+    }
+    .reactor {
+      position: relative;
+      width: 230px;
+      height: 230px;
+      display: grid;
+      place-items: center;
+      transform-style: preserve-3d;
+    }
+    .reactor-ring {
+      position: absolute;
+      inset: 0;
+      border: 2px solid var(--accent);
+      border-radius: 50%;
+      box-shadow: 0 0 20px rgba(var(--rgb), 0.35), inset 0 0 20px rgba(var(--rgb), 0.25);
+      animation: reactor-orbit 9s linear infinite;
+      animation-play-state: var(--motion-state);
+    }
+    .reactor-ring:nth-child(2) {
+      inset: 18px;
+      border-color: var(--secondary);
+      box-shadow: 0 0 20px rgba(var(--secondary-rgb), 0.35);
+      animation-duration: 13s;
+      animation-direction: reverse;
+    }
+    .reactor-ring:nth-child(3) {
+      inset: 34px;
+      border-style: dashed;
+      border-color: var(--gold);
+      animation-duration: 18s;
+    }
+    .reactor-core {
+      display: grid;
+      place-items: center;
+      width: 95px;
+      height: 95px;
+      border-radius: 20px;
+      color: #080a16;
+      font-family: var(--font-display);
+      font-size: 2.2rem;
+      font-weight: 800;
+      letter-spacing: -0.06em;
+      background: linear-gradient(130deg, var(--accent), var(--secondary));
+      box-shadow: 0 0 60px rgba(var(--rgb), 0.45);
+      animation: core-float 5s ease-in-out infinite;
+      animation-play-state: var(--motion-state);
+    }
+    .scene-label {
+      position: absolute;
+      bottom: 4px;
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      color: var(--accent);
+      text-transform: uppercase;
+    }
+
+    .universe-controls { display: flex; gap: 8px; margin: 14px 0 18px; }
+    .universe-controls button {
+      flex: 1;
+      font-family: var(--font-display);
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: var(--muted);
+      border: 1px solid var(--line);
+      background: #0a0d1c;
+      padding: 9px 6px;
+      clip-path: var(--clip-button);
+      transition: all 0.25s;
+    }
+    .universe-controls button:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      background: rgba(var(--rgb), 0.1);
+    }
+    .universe-controls button[aria-pressed="true"] {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #080a16;
+      box-shadow: 0 0 25px rgba(var(--rgb), 0.35);
+    }
+
+    .profile-card h2 { font-size: 1.6rem; color: #fff; margin-top: 4px; }
+    .profile-card > p { margin-top: 8px; color: var(--muted); font-size: 0.92rem; }
+    
+    .card-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 15px;
+      margin-top: 20px;
+      padding-top: 16px;
+      border-top: 1px solid var(--line);
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      color: var(--muted);
+    }
+    .card-bottom strong { display: block; color: #fff; font-family: var(--font-display); font-size: 0.95rem; font-weight: 600; }
+    .card-bottom .tag { color: var(--accent); border-color: var(--line-bright); background: rgba(var(--rgb), 0.08); }
+
+    /* ==========================================================================
+       METRICS / STATS TELEMETRY GRID
+       ========================================================================== */
+    .metrics {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      margin: 40px 0 0;
+      padding: 0;
+      gap: 16px;
+      border: 0;
+    }
+    .metrics > div {
+      padding: 22px 24px;
+      border: 1px solid var(--line-bright);
+      border-radius: var(--radius);
+      background: linear-gradient(145deg, rgba(20, 25, 48, 0.9), rgba(10, 13, 30, 0.9));
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.25s, border-color 0.25s, box-shadow 0.25s;
+    }
+    .metrics > div::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 4px;
+      height: 100%;
+      background: linear-gradient(180deg, var(--accent), var(--secondary));
+    }
+    .metrics > div:hover {
+      transform: translateY(-4px);
+      border-color: var(--accent);
+      box-shadow: 0 14px 35px rgba(0, 0, 0, 0.5), var(--glow-sm);
+    }
+    .metrics dt {
+      font-family: var(--font-display);
+      font-size: 2.8rem;
+      font-weight: 700;
+      letter-spacing: -0.04em;
+      line-height: 1;
+      color: var(--accent);
+      text-shadow: 0 0 20px rgba(var(--rgb), 0.4);
+    }
+    .metrics dd {
+      margin: 8px 0 0;
+      color: var(--muted);
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    /* ==========================================================================
+       SECTIONS & HEADINGS
+       ========================================================================== */
+    .section { padding-block: 64px; border-bottom: 1px solid rgba(255, 255, 255, 0.08); }
+    .section-head { display: flex; justify-content: space-between; gap: 35px; align-items: flex-end; margin-bottom: 35px; }
+    .section-head p { max-width: 420px; font-size: 0.95rem; color: var(--muted); }
+    .section-head .eyebrow { margin-bottom: 12px; }
+
+    /* ==========================================================================
+       ABOUT ME SECTION
+       ========================================================================== */
+    .about-grid { display: grid; grid-template-columns: 1fr 1.3fr; gap: 60px; }
+    .about-text {
+      padding: 32px;
+      border: 1px solid var(--line-bright);
+      border-radius: var(--radius);
+      background: linear-gradient(145deg, rgba(20, 25, 48, 0.9), rgba(10, 13, 30, 0.9));
+      box-shadow: 0 12px 40px rgba(0,0,0,0.5);
+    }
+    .about-text p { color: var(--muted); font-size: 1.08rem; margin-bottom: 18px; line-height: 1.65; }
+    .about-text strong { color: #fff; font-weight: 600; }
+
+    .tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 20px; }
+    .tag {
+      display: inline-block;
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      font-weight: 600;
+      padding: 5px 12px;
+      border: 1px solid rgba(var(--rgb), 0.35);
+      border-radius: 4px;
+      color: var(--accent);
+      background: rgba(14, 19, 38, 0.8);
+      letter-spacing: 0.04em;
+      transition: all 0.2s;
+    }
+    .tag:hover {
+      border-color: var(--accent);
+      background: rgba(var(--rgb), 0.2);
+      box-shadow: var(--glow-sm);
+      transform: translateY(-1px);
+    }
+
+    /* ==========================================================================
+       PROJECTS / MISSIONS
+       ========================================================================== */
+    .filters { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 28px; }
+    .filter {
+      border: 1px solid var(--line-bright);
+      clip-path: var(--clip-button);
+      padding: 9px 20px;
+      background: #0e1326;
+      color: var(--muted);
+      font-family: var(--font-display);
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      transition: all 0.2s;
+    }
+    .filter:hover { border-color: var(--accent); color: var(--accent); background: rgba(var(--rgb), 0.1); }
+    .filter[aria-pressed="true"] {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #080a16;
+      box-shadow: var(--glow-sm);
+    }
+
+    .project-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
+    .project {
+      display: flex;
+      flex-direction: column;
+      background: linear-gradient(145deg, rgba(20, 25, 48, 0.95), rgba(10, 13, 30, 0.95));
+      border: 1px solid var(--line-bright);
+      border-radius: var(--radius);
+      padding: 30px;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 12px 40px rgba(0,0,0,0.5);
+      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s, box-shadow 0.3s;
+    }
+    .project:hover {
+      transform: translateY(-6px);
+      border-color: var(--accent);
+      box-shadow: 0 16px 45px rgba(0, 0, 0, 0.6), var(--glow-md);
+    }
+    .project.featured { border-color: rgba(var(--rgb), 0.6); }
+
+    .project-top { display: flex; justify-content: space-between; align-items: center; gap: 15px; margin-bottom: 20px; }
+    .project-number { font-family: var(--font-mono); font-size: 0.78rem; color: var(--accent); font-weight: 700; letter-spacing: 0.06em; }
+    .project-category {
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--gold);
+      background: rgba(255, 230, 0, 0.12);
+      border: 1px solid rgba(255, 230, 0, 0.4);
+      padding: 3px 8px;
+      border-radius: 3px;
+    }
+
+    .project h3 { font-size: 1.65rem; color: #fff; margin-bottom: 6px; }
+    .project > p { color: var(--muted); font-size: 0.95rem; line-height: 1.6; margin-top: 10px; }
+    
+    .project .contribution {
+      border-top: 1px solid var(--line);
+      background: rgba(0, 0, 0, 0.3);
+      padding: 14px 16px;
+      margin-top: 22px;
+      border-radius: 6px;
+      border-left: 3px solid var(--accent);
+    }
+    .contribution strong {
+      color: var(--gold);
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      display: block;
+      margin-bottom: 6px;
+    }
+    .project .tags { margin-top: auto; padding-top: 20px; }
+
+    /* VISUAL CARDS ART */
+    .project-visual {
+      position: relative;
+      height: 150px;
+      overflow: hidden;
+      margin: -30px -30px 24px;
+      background: radial-gradient(ellipse at 50% 100%, rgba(var(--rgb), 0.22), #090d20 70%);
+      display: grid;
+      place-items: center;
+      perspective: 500px;
+    }
+    .project-visual::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image: linear-gradient(#ffffff10 1px, transparent 1px), linear-gradient(90deg, #ffffff10 1px, transparent 1px);
+      background-size: 24px 24px;
+      transform: rotateX(55deg) scale(1.6);
+    }
+    .project-visual i {
+      position: absolute;
+      width: 78px;
+      height: 78px;
+      border: 1px solid var(--accent);
+      background: rgba(var(--rgb), 0.06);
+      box-shadow: 0 0 22px rgba(var(--rgb), 0.14);
+      transform: rotate(-30deg) skew(15deg, 15deg);
+      animation: layer-float 5s ease-in-out infinite;
+      animation-play-state: var(--motion-state);
+    }
+    .project-visual i:nth-child(2) { margin-top: 32px; animation-delay: -1.5s; opacity: 0.65; }
+    .project-visual i:nth-child(3) { margin-top: 64px; animation-delay: -3s; opacity: 0.35; }
+    .project[data-category="games"] .project-visual { --accent: #ff007f; --rgb: 255, 0, 127; }
+    .project[data-category="games"] .project-visual i { border-radius: 50%; width: 110px; height: 65px; }
+    .project[data-category="xr"] .project-visual { --accent: #b99aff; --rgb: 185, 154, 255; }
+    .project[data-category="xr"] .project-visual i { border-radius: 28%; }
+    .project:hover .project-visual i { border-width: 2px; box-shadow: 0 0 30px rgba(var(--rgb), 0.4); }
+
+    /* ARCHIVE */
+    .archive {
+      margin-top: 28px;
+      border: 1px solid var(--line-bright);
+      border-radius: var(--radius);
+      background: rgba(14, 18, 36, 0.85);
+      padding: 22px 28px;
+    }
+    summary {
+      cursor: pointer;
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 1.05rem;
+      color: var(--accent);
+      letter-spacing: 0.04em;
+    }
+    .archive-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px 35px; margin-top: 24px; padding-top: 18px; border-top: 1px solid var(--line); }
+    .archive-grid h3 { font-size: 1.05rem; color: #fff; }
+    .archive-grid p { font-size: 0.88rem; margin-top: 6px; color: var(--muted); }
+
+    /* ==========================================================================
+       CASE STUDIES / BOSS DEFECTS
+       ========================================================================== */
+    .skills-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 22px; }
+    #skills .skills-grid { grid-template-columns: repeat(3, 1fr); }
+    
+    .skill {
+      padding: 26px;
+      border: 1px solid var(--line-bright);
+      border-radius: var(--radius);
+      background: linear-gradient(145deg, rgba(20, 25, 48, 0.95), rgba(10, 13, 30, 0.95));
+      box-shadow: 0 12px 35px rgba(0,0,0,0.4);
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+    .skill-index {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--accent);
+      display: block;
+      margin-bottom: 14px;
+      letter-spacing: 0.08em;
+    }
+    .skill h3 { font-size: 1.25rem; color: #fff; }
+    .skill p { margin-top: 10px; color: var(--muted); font-size: 0.92rem; line-height: 1.6; }
+
+    .case-study { cursor: pointer; }
+    .case-study summary {
+      display: inline-block;
+      width: fit-content;
+      font-family: var(--font-mono);
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--accent);
+      margin-top: 14px;
+      list-style: none;
+      cursor: pointer;
+      text-transform: uppercase;
+    }
+    .case-study summary::before { content: "▶ "; color: var(--gold); }
+    .case-study details[open] summary::before { content: "▼ "; }
+    .case-study details {
+      margin-top: 12px;
+      background: rgba(0, 0, 0, 0.45);
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      padding: 14px 16px;
+    }
+    .case-study details p { margin-top: 8px; font-size: 0.88rem; color: var(--muted); }
+    .case-study details strong { color: var(--accent); }
+    .case-study .tags { margin-top: auto; padding-top: 16px; }
+
+    /* ==========================================================================
+       EXPERIENCE / CAMPAIGN LOG
+       ========================================================================== */
+    .experience {
+      display: grid;
+      grid-template-columns: 240px 1fr;
+      gap: 45px;
+      margin-bottom: 22px;
+      padding: 32px;
+      border: 1px solid var(--line-bright);
+      border-radius: var(--radius);
+      background: linear-gradient(145deg, rgba(20, 25, 48, 0.95), rgba(10, 13, 30, 0.95));
+      box-shadow: 0 12px 40px rgba(0,0,0,0.5);
+    }
+    .period {
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--accent);
+    }
+    .period .tag {
+      margin-top: 10px;
+      color: #39ff14;
+      border-color: rgba(57, 255, 20, 0.4);
+      background: rgba(57, 255, 20, 0.08);
+    }
+    .company {
+      font-family: var(--font-display);
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--gold);
+      margin-top: 6px;
+      letter-spacing: 0.04em;
+    }
+    .experience h3 { font-size: 1.45rem; color: #fff; }
+    .experience ul {
+      padding-left: 20px;
+      margin: 18px 0 0;
+      color: var(--muted);
+      font-size: 0.95rem;
+      line-height: 1.65;
+    }
+    .experience li { margin-bottom: 10px; padding-left: 6px; }
+    li::marker { color: var(--accent); }
+
+    .education {
+      display: flex;
+      justify-content: space-between;
+      gap: 30px;
+      margin-top: 28px;
+      padding: 22px 28px;
+      border: 1px solid var(--line-bright);
+      border-radius: var(--radius);
+      background: rgba(14, 19, 38, 0.85);
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+    .education strong { display: block; color: var(--accent); font-family: var(--font-display); font-size: 1rem; margin-bottom: 4px; }
+
+    /* ==========================================================================
+       CONTACT / FINAL CO-OP SUMMON
+       ========================================================================== */
+    .contact {
+      margin-block: 40px;
+      padding: 44px;
+      border-radius: var(--radius);
+      color: white;
+      background: linear-gradient(135deg, rgba(20, 25, 48, 0.98), rgba(10, 13, 30, 0.98));
+      border: 2px solid var(--line-bright);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.7), 0 0 30px rgba(var(--rgb), 0.15);
+      display: grid;
+      grid-template-columns: 1.15fr 1fr;
+      gap: 55px;
+      position: relative;
+      overflow: hidden;
+    }
+    .contact .eyebrow { color: var(--accent); }
+    .contact h2 { font-size: clamp(2.2rem, 4vw, 3.4rem); color: #fff; }
+    .contact p { color: var(--muted); margin-top: 16px; font-size: 0.98rem; }
+    .contact .button.primary { background: var(--accent); color: #080a16; border-color: var(--accent); }
+    .contact .button.primary:hover { background: #fff; box-shadow: var(--glow-md); }
+
+    .contact-details { align-self: center; }
+    .contact-details div {
+      padding: 14px 16px;
+      border-bottom: 1px solid var(--line);
+      background: rgba(0, 0, 0, 0.3);
+      border-radius: 6px;
+      margin-bottom: 8px;
+    }
+    .contact-details dt {
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--accent);
+    }
+    .contact-details dd {
+      margin: 4px 0 0;
+      font-family: var(--font-display);
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: #fff;
+    }
+    .contact-details a { text-decoration: none; color: var(--gold); }
+    .contact-details a:hover { text-decoration: underline; color: #fff; }
+
+    footer {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      padding-bottom: 30px;
+      color: var(--muted);
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+    }
+    footer a { color: var(--accent); }
+
+    /* ==========================================================================
+       NEXT-GEN GAME ENGINE BACKGROUND (NEBULA ORBS + CONSTELLATION PARTICLES)
+       ========================================================================== */
+    .ambient { position: fixed; inset: 0; z-index: 0; overflow: hidden; pointer-events: none; contain: strict; }
+    
+    /* Glowing Atmosphere Orbs */
+    .ambient-orb {
+      position: absolute;
+      width: min(90vw, 1000px);
+      aspect-ratio: 1;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(var(--rgb), 0.2), transparent 68%);
+      animation: ambient-drift 24s ease-in-out infinite alternate;
+      animation-play-state: var(--motion-state);
+    }
+    .ambient-orb:nth-child(2) { background: radial-gradient(circle, rgba(var(--secondary-rgb), 0.2), transparent 68%); animation-duration: 31s; animation-delay: -12s; }
+    .ambient-orb:nth-child(3) { background: radial-gradient(circle, rgba(0, 240, 255, 0.15), transparent 68%); animation-duration: 28s; animation-delay: -7s; }
+    
+    .ambient-path {
+      position: absolute;
+      width: 340px;
+      height: 340px;
+      border: 1px solid rgba(var(--rgb), 0.3);
+      border-radius: 50%;
+      box-shadow: 0 0 60px rgba(var(--rgb), 0.1), inset 0 0 60px rgba(var(--rgb), 0.1);
+      top: 18%;
+      right: 8%;
+      animation: path-drift 38s linear infinite;
+      animation-play-state: var(--motion-state);
+    }
+    .ambient-path.second { width: 200px; height: 200px; top: auto; bottom: 12%; left: 6%; animation-direction: reverse; animation-delay: -15s; }
+    #network { position: absolute; inset: 0; width: 100%; height: 100%; }
+
+    .scroll-meter {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: linear-gradient(90deg, var(--accent), var(--secondary), var(--gold));
+      transform: scaleX(var(--progress, 0));
+      transform-origin: left;
+      z-index: 50;
+      pointer-events: none;
+      box-shadow: 0 0 10px var(--accent);
+    }
+
+    .holo {
+      --px: 50%;
+      --py: 50%;
+      position: relative;
+      isolation: isolate;
+      transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+    }
+    .holo::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      pointer-events: none;
+      z-index: -1;
+      background: radial-gradient(circle at var(--px) var(--py), rgba(var(--rgb), 0.22), transparent 58%);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    .holo:hover::after, .holo:focus-within::after { opacity: 1; }
+    .holo:hover { transform: translateY(-4px); border-color: var(--accent); box-shadow: 0 14px 40px rgba(0,0,0,0.5), var(--glow-sm); }
+
+    .scan-frame {
+      position: absolute;
+      inset: 6px;
+      z-index: 0;
+      pointer-events: none;
+      opacity: 0;
+      border-radius: inherit;
+      transition: opacity 0.3s ease;
+      background:
+        linear-gradient(to right, var(--accent) 2px, transparent 2px) 0 0/14px 2px no-repeat,
+        linear-gradient(to bottom, var(--accent) 2px, transparent 2px) 0 0/2px 14px no-repeat,
+        linear-gradient(to left, var(--accent) 2px, transparent 2px) 100% 0/14px 2px no-repeat,
+        linear-gradient(to bottom, var(--accent) 2px, transparent 2px) 100% 0/2px 14px no-repeat,
+        linear-gradient(to right, var(--accent) 2px, transparent 2px) 0 100%/14px 2px no-repeat,
+        linear-gradient(to top, var(--accent) 2px, transparent 2px) 0 100%/2px 14px no-repeat,
+        linear-gradient(to left, var(--accent) 2px, transparent 2px) 100% 100%/14px 2px no-repeat,
+        linear-gradient(to top, var(--accent) 2px, transparent 2px) 100% 100%/2px 14px no-repeat;
+    }
+    .scan-tag {
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      z-index: 0;
+      padding: 3px 8px;
+      border: 1px solid rgba(var(--rgb), 0.5);
+      border-radius: 4px;
+      background: rgba(8, 10, 22, 0.9);
+      color: var(--accent);
+      font-family: var(--font-mono);
+      font-size: 0.62rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      opacity: 0;
+      transform: translateY(-4px);
+      transition: opacity 0.3s ease, transform 0.3s ease;
+      pointer-events: none;
+      white-space: nowrap;
+    }
+    @media (hover: hover) and (pointer: fine) {
+      .holo:hover .scan-frame, .holo:focus-within .scan-frame { opacity: 0.9; }
+      .holo:hover .scan-tag, .holo:focus-within .scan-tag { opacity: 1; transform: translateY(0); }
+    }
+
+    .motion-toggle {
+      position: fixed;
+      bottom: 16px;
+      right: 16px;
+      z-index: 30;
+      border: 1px solid var(--line-bright);
+      background: rgba(14, 19, 38, 0.95);
+      color: var(--accent);
+      font-family: var(--font-mono);
+      box-shadow: 0 4px 20px rgba(0,0,0,0.6);
+      padding: 9px 18px;
+      font-size: 0.75rem;
+      clip-path: var(--clip-button);
+    }
+    .motion-toggle:hover { background: var(--accent); color: #080a16; }
+
+    @keyframes ambient-drift { from { transform: translate3d(-4%,-5%,0) scale(.95); } to { transform: translate3d(12%,18%,0) scale(1.12); } }
+    @keyframes path-drift { 0% { transform: translateY(0) rotate(0); } 50% { transform: translateY(-35px) rotate(180deg); } 100% { transform: translateY(0) rotate(360deg); } }
+    @keyframes reactor-orbit { from { transform: rotateZ(0) rotateY(60deg) rotateX(25deg); } to { transform: rotateZ(360deg) rotateY(60deg) rotateX(25deg); } }
+    @keyframes core-float { 50% { transform: translateY(-10px) rotate(6deg); } }
+    @keyframes layer-float { 50% { transform: translateY(-12px); } }
+
+    /* RESPONSIVE */
+    @media (max-width: 1000px) {
+      .hero-grid { grid-template-columns: 1fr; gap: 36px; }
+      .about-grid { grid-template-columns: 1fr; gap: 36px; }
+      .skills-grid { grid-template-columns: 1fr !important; }
+    }
+    @media (max-width: 760px) {
+      .container { width: calc(100% - 36px); }
+      .nav-links { width: 100%; flex-wrap: wrap; gap: 15px 22px; padding-top: 18px; }
+      .menu-button { display: block; }
+      .nav-links:not(.open) { display: none; }
+      .metrics { grid-template-columns: repeat(2, 1fr); gap: 15px; }
+      .project-grid, .archive-grid, .experience, .contact { grid-template-columns: 1fr; }
+      .project-visual { margin: -24px -24px 24px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation: none !important; transition: none !important; }
+    }
+    @media print {
+      .ambient, .motion-toggle, .scroll-meter, .universe-controls, .play-hint, .pulse-button, .project-visual, .header, .quality-art, .filters { display: none !important; }
+      body { background: white; color: black; font-size: 10pt; }
+      .container { width: 100%; }
+      .project, .skill, .experience, .contact { background: white !important; color: black !important; border: 0; border-bottom: 1px solid #ccc; box-shadow: none !important; }
+    }
+  </style>
+</head>
+<body>
+<div class="scroll-meter" aria-hidden="true"></div>
+<div class="ambient" aria-hidden="true">
+  <span class="ambient-orb"></span><span class="ambient-orb"></span><span class="ambient-orb"></span>
+  <span class="ambient-path"></span><span class="ambient-path second"></span>
+  <canvas id="network"></canvas>
+</div>
+<a class="skip" href="#main">Skip to content</a>
+<button class="motion-toggle" id="motion-toggle" type="button" aria-pressed="false" hidden>Background motion</button>
+<header class="header">
+  <nav class="nav container" aria-label="Main navigation">
+    <a class="brand" href="#main" aria-label="Abhilash Johny, home"><span class="monogram" aria-hidden="true">AJ</span><span>Abhilash Johny<small>QA Engineer &amp; Team Lead</small></span></a>
+    <button class="menu-button" id="menu-button" type="button" aria-controls="nav-links" aria-expanded="false">Menu</button>
+    <ul class="nav-links" id="nav-links"><li><a href="#about">About</a></li><li><a href="#projects">Selected work</a></li><li><a href="#bugs">Case studies</a></li><li><a href="#experience">Experience</a></li><li><a href="#skills">Expertise</a></li><li><a href="#interests">Interests</a></li><li><a class="nav-contact" href="#contact">Let's connect <span aria-hidden="true">↗</span></a></li></ul>
+  </nav>
+</header>
+<main id="main" tabindex="-1">
+  <section class="hero container" aria-labelledby="hero-title">
+    <div class="hero-grid">
+      <div>
+        <div class="availability">Open to Game QA &amp; Test Engineer roles</div>
+        <p class="intro">Hi, I'm Abhilash Johny.</p>
+        <h1 id="hero-title">I test the<br>unexpected.<span>You ship<br>with confidence.</span></h1>
+        <p class="hero-copy"><strong>QA Engineer &amp; Team Lead</strong> connecting meticulous manual testing with practical automation. From enterprise workflows to immersive worlds, I help teams ship with confidence.</p>
+        <div class="actions"><a class="button primary" href="#projects">Explore my work <span aria-hidden="true">↗</span></a></div>
+        <p class="location">Thiruvananthapuram, India · 4+ years in quality assurance</p>
+        <p class="play-hint" id="play-hint" hidden>Three worlds. One quality mindset. Explore the visual modes.</p>
+        <button class="button pulse-button" id="pulse-network" type="button" hidden>Pulse the network <span aria-hidden="true">◎</span></button>
+      </div>
+      <aside class="profile-card" aria-label="Professional focus" data-scan="PROFILE :: VERIFIED">
+        <div class="card-top"><span>The quality mindset</span><span>Detail → confidence</span></div>
+        <div class="quality-art" aria-hidden="true"><div class="reactor"><i class="reactor-ring"></i><i class="reactor-ring"></i><i class="reactor-ring"></i><span class="reactor-core">AJ</span></div><span class="scene-label" id="scene-label">ENTERPRISE / CONNECTED SYSTEMS</span></div>
+        <div class="universe-controls" id="universe-controls" role="group" aria-label="Choose visual theme" hidden><button type="button" data-universe="enterprise" aria-pressed="true">01 Enterprise</button><button type="button" data-universe="games" aria-pressed="false">02 Games</button><button type="button" data-universe="xr" aria-pressed="false">03 XR</button></div>
+        <h2>More than finding bugs.</h2><p>Understanding the product, questioning assumptions, and protecting the user experience.</p>
+        <div class="card-bottom"><div>Currently at <strong>GNX Solutions</strong></div><span class="tag">Enterprise + Games + XR</span></div>
+      </aside>
+    </div>
+    <dl class="metrics"><div data-scan="LOG :: 4+ YRS"><dt>4+</dt><dd>Years of QA experience</dd></div><div data-scan="INDEX :: 20+ TITLES"><dt>20+</dt><dd>Game titles tested</dd></div><div data-scan="AUTHORED :: 4000+"><dt>4000+</dt><dd>Test cases authored</dd></div><div data-scan="DEFECTS :: ZERO CRITICAL"><dt>4</dt><dd>Major projects launched with<br>zero critical bugs</dd></div></dl>
+  </section>
+  <section class="section container" id="about" aria-labelledby="about-title">
+    <div class="about-grid"><div><p class="eyebrow">01 / About me</p><h2 id="about-title">Different platforms.<br>One quality mindset.</h2></div><div class="about-text" data-scan="CONTEXT :: ANALYZED"><p>My work spans two very different worlds: <strong>enterprise software that businesses depend on</strong> and <strong>games that people love to play</strong>. That range has taught me to look beyond a passing test case and ask whether the experience actually works for the person using it.</p><p>At GNX Solutions, I lead QA for TalentSync, an enterprise HRMS and recruitment platform. Previously at TILTLABS, I tested 20+ game titles across PC, console, mobile, AR/VR, and the metaverse-including accessibility-focused VR experiences.</p><p>I bring hands-on investigation, structured test design, and clear communication to Agile teams, with a growing focus on Playwright automation.</p><div class="tags"><span class="tag">Enterprise QA</span><span class="tag">Test automation</span><span class="tag">Game &amp; XR testing</span><span class="tag">QA leadership</span></div></div></div>
+  </section>
+  <section class="section container" id="projects" aria-labelledby="projects-title">
+    <div class="section-head"><div><p class="eyebrow">02 / Selected work</p><h2 id="projects-title">Quality, in practice.</h2></div><p>A closer look at the products I've tested and the responsibilities I've owned.</p></div>
+    <div class="filters" id="project-filters" role="group" aria-label="Filter selected projects" hidden><button class="filter" type="button" data-filter="all" aria-pressed="true">All work</button><button class="filter" type="button" data-filter="enterprise" aria-pressed="false">Enterprise</button><button class="filter" type="button" data-filter="games" aria-pressed="false">Games</button><button class="filter" type="button" data-filter="xr" aria-pressed="false">XR &amp; accessibility</button></div>
+    <p class="sr-only" id="project-count" role="status" aria-live="polite"></p>
+    <div class="project-grid">
+      <article class="project featured" data-category="enterprise" data-scan="COVERAGE :: HIGH"><div class="project-top"><span class="project-number">01 / Enterprise</span><span class="project-category">QA lead</span></div><h3>TalentSync</h3><p>Enterprise HRMS and recruitment platform covering learning &amp; development, recruitment, and candidate journeys.</p><p class="contribution"><strong>My contribution</strong>Built a Playwright framework using TypeScript and Page Object Model. Investigated HRMS data-integrity gaps and a Keycloak token-refresh race condition, and designed OAuth load tests.</p><div class="tags"><span class="tag">Playwright</span><span class="tag">TypeScript</span><span class="tag">JMeter</span><span class="tag">Keycloak</span></div></article>
+      <article class="project" data-category="games" data-scan="SYNC :: VERIFIED"><div class="project-top"><span class="project-number">02 / Multiplayer</span><span class="project-category">Cross-platform</span></div><h3>MetaGP</h3><p>A multiplayer metaverse experience bringing avatars, vehicles, and in-game transactions together.</p><p class="contribution"><strong>My contribution</strong>Tested avatar customisation, vehicle mechanics, network synchronisation, in-game transactions, and cross-platform performance.</p><div class="tags"><span class="tag">Game mechanics</span><span class="tag">Multiplayer QA</span><span class="tag">Network testing</span><span class="tag">Metaverse</span></div></article>
+      <article class="project" data-category="xr" data-scan="ACCESS :: PASSED"><div class="project-top"><span class="project-number">03 / Inclusive experiences</span><span class="project-category">VR accessibility</span></div><h3>Serenity Pathways</h3><p>A VR game for children with physical disabilities, using a balancing board as an input device.</p><p class="contribution"><strong>My contribution</strong>Validated assistive interactions, user comfort, and inclusive environment navigation-focusing on how the experience works for its intended users.</p><div class="tags"><span class="tag">Accessibility</span><span class="tag">Assistive UX</span><span class="tag">VR comfort</span></div></article>
+      <article class="project" data-category="games" data-scan="INPUT :: VALIDATED"><div class="project-top"><span class="project-number">04 / PC &amp; PlayStation</span><span class="project-category">Unreal Engine 5</span></div><h3>Drone Strike Protocol</h3><p>Gameplay and input testing across levels, performance conditions, and PlayStation controller hardware.</p><p class="contribution"><strong>My contribution</strong>Tested level behaviour, gameplay mechanics, FPS stability, button mapping, analog sensitivity, and controller response to surface issues that affect gameplay.</p><div class="tags"><span class="tag">Game mechanics</span><span class="tag">UE5</span><span class="tag">Controller input</span><span class="tag">Performance</span></div></article>
+    </div>
+    <details class="archive"><summary>More projects &amp; platform experience</summary><div class="archive-grid">
+      <div data-scan="PERF :: CHECKED"><h3>Game landing pages &amp; web portals</h3><p>Web performance, load, security, UX, functional and cross-browser testing with PageSpeed, JMeter and OWASP ZAP.</p><div class="tags"><span class="tag">Performance</span><span class="tag">Security</span><span class="tag">UX</span></div></div>
+      <div data-scan="REGRESSION :: CLEAR"><h3>VR Cricket · Wonderla</h3><p>Meta Quest controller, gameplay mechanics, regression, visual/texture checks, and performance testing.</p><div class="tags"><span class="tag">Game mechanics</span><span class="tag">Controller input</span><span class="tag">Visuals &amp; textures</span></div></div>
+      <div data-scan="IMMERSION :: OK"><h3>MP Tourism VR</h3><p>Immersion, environment &amp; texture fidelity, and performance testing for children's jungle and river safari experiences.</p><div class="tags"><span class="tag">Immersion</span><span class="tag">Textures &amp; visuals</span><span class="tag">Performance</span></div></div>
+      <div data-scan="FTUE :: APPROVED"><h3>Aya &amp; Pete Play Learn Explore</h3><p>Educational UX, first-time user experience, and child-safe functionality on Android and iOS.</p><div class="tags"><span class="tag">FTUE</span><span class="tag">Child-safe UX</span></div></div>
+      <div data-scan="RETENTION :: TRACKED"><h3>10+ hyper-casual games</h3><p>Gameplay mechanics, gameplay loops, retention, and cross-device compatibility across mobile platforms.</p><div class="tags"><span class="tag">Game mechanics</span><span class="tag">Retention</span><span class="tag">Cross-device</span></div></div>
+      <div data-scan="ECONOMY :: BALANCED"><h3>Guardian Chain</h3><p>Gameplay mechanics, in-game economy, visual/texture quality, and performance on PC and mobile.</p><div class="tags"><span class="tag">Game mechanics</span><span class="tag">Economy</span><span class="tag">Visuals &amp; textures</span></div></div>
+      <div data-scan="ENGAGEMENT :: LOGGED"><h3>Roblox games</h3><p>Gameplay mechanics, multiplayer systems, and user engagement testing.</p><div class="tags"><span class="tag">Game mechanics</span><span class="tag">Multiplayer</span><span class="tag">Engagement</span></div></div>
+      <div data-scan="SPATIAL :: OK"><h3>Spatial experiences</h3><p>VR functionality, spatial interactions, and environment/texture checks across VR and web.</p><div class="tags"><span class="tag">Spatial interactions</span><span class="tag">Visuals &amp; textures</span></div></div>
+      <div data-scan="LAUNCH :: CLEARED"><h3>MCode · 5 games</h3><p>Cross-platform compatibility, gameplay mechanics, and launch validation under a hard deadline.</p><div class="tags"><span class="tag">Game mechanics</span><span class="tag">Cross-platform</span></div></div>
+      <div data-scan="SOAK :: COMPLETE"><h3>VR Rollercoaster</h3><p>Latency, motion sickness, texture/visual fidelity, and soak testing on Meta Quest.</p><div class="tags"><span class="tag">Latency</span><span class="tag">Visuals &amp; textures</span><span class="tag">Soak testing</span></div></div>
+      <div data-scan="LOGIC :: VERIFIED"><h3>Puzzle &amp; quiz games</h3><p>Gameplay logic and mechanics, scoring, UI/texture checks, and edge-case inputs on mobile and PC.</p><div class="tags"><span class="tag">Game logic</span><span class="tag">Scoring</span><span class="tag">UI &amp; visuals</span></div></div>
+    </div></details>
+  </section>
+  <section class="section container" id="bugs" aria-labelledby="bugs-title">
+    <div class="section-head"><div><p class="eyebrow">03 / Case studies</p><h2 id="bugs-title">Bugs worth writing up.</h2></div><p>Four defects I found and root-caused, from an OAuth login loop to an onsite VR calibration fault - open each for the full report.</p></div>
+    <div class="skills-grid">
+      <article class="skill case-study" data-scan="SEVERITY :: HIGH" tabindex="0"><span class="skill-index">01 - AUTH</span><h3>Login loop on backdated system clock</h3><p>Changing the system clock to a past date made Keycloak report a successful login, then bounce the user back to the login screen in a loop.</p>
+        <details><summary>Full report</summary>
+          <p><strong>Steps:</strong> Set the client's system date to the past → log in with valid credentials → submit.</p>
+          <p><strong>Actual:</strong> UI shows a success toast, then redirects back to login instead of the dashboard - no way to proceed.</p>
+          <p><strong>Root cause:</strong> Token issued-at/expiry checks are time-dependent; a backdated clock made the session token look invalid immediately after issuance.</p>
+        </details>
+        <div class="tags"><span class="tag">Keycloak</span><span class="tag">OAuth</span><span class="tag">Edge case</span></div>
+      </article>
+      <article class="skill case-study" data-scan="SEVERITY :: CRITICAL" tabindex="0"><span class="skill-index">02 - SECURITY</span><h3>Sensitive data masked in UI, exposed in API response</h3><p>An employee field shown masked on screen was returned fully unmasked in the raw API response.</p>
+        <details><summary>Full report</summary>
+          <p><strong>Steps:</strong> Open a record with a masked sensitive field → inspect the network response for that endpoint.</p>
+          <p><strong>Actual:</strong> The JSON payload contained the full, unmasked value - visible to anyone inspecting traffic.</p>
+          <p><strong>Root cause:</strong> Masking was implemented client-side only; the backend never redacted the field before sending it.</p>
+        </details>
+        <div class="tags"><span class="tag">Security</span><span class="tag">API testing</span><span class="tag">Data exposure</span></div>
+      </article>
+      <article class="skill case-study" data-scan="SEVERITY :: HIGH" tabindex="0"><span class="skill-index">03 - XR</span><h3>VR rollercoaster drifted off-sync on a rightward glance</h3><p>On a physical rollercoaster synced to VR headsets, looking right during one accelerating slope shifted the in-headset scene out of alignment with the real ride.</p>
+        <details><summary>Full report</summary>
+          <p><strong>Investigation:</strong> Ruled out Wi-Fi and modem placement across 100+ onsite rides before isolating the trigger to one exact combination: that slope's acceleration point plus a rightward head turn.</p>
+          <p><strong>Root cause:</strong> A build-level calibration issue in positional tracking during that acceleration/rotation combination - fixed by the dev team once reproduced with full conditions.</p>
+        </details>
+        <div class="tags"><span class="tag">VR calibration</span><span class="tag">Onsite testing</span><span class="tag">Root-cause analysis</span></div>
+      </article>
+      <article class="skill case-study" data-scan="SEVERITY :: HIGH" tabindex="0"><span class="skill-index">04 - BALANCE</span><h3>Guided missiles got stuck at the map edge</h3><p>Speed-boosting to the map boundary made incoming guided missiles freeze mid-air, letting the player dodge the hardest weapon in the game for free.</p>
+        <details><summary>Full report</summary>
+          <p><strong>Steps:</strong> Draw a guided missile from an enemy drone → speed boost to the map edge before it connects.</p>
+          <p><strong>Actual:</strong> The missile stops tracking and hangs in the air, letting the player safely close in and destroy the enemy drone with no risk.</p>
+          <p><strong>Root cause:</strong> Missile tracking logic didn't handle the map-boundary condition, so it halted instead of continuing to track. Verified reproducible across multiple levels, including advanced-weapon stages.</p>
+        </details>
+        <div class="tags"><span class="tag">Game balance</span><span class="tag">Exploit</span><span class="tag">Combat AI</span></div>
+      </article>
+    </div>
+  </section>
+  <section class="section container" id="experience" aria-labelledby="experience-title">
+    <div class="section-head"><div><p class="eyebrow">04 / Experience</p><h2 id="experience-title">Hands-on testing.<br>End-to-end ownership.</h2></div><p>From cross-platform game QA to leading quality for enterprise workflows.</p></div>
+    <article class="experience" data-scan="ROLE :: ACTIVE"><div class="period"><time datetime="2026-05">May 2026</time> - Present<br><span class="tag">Current role</span></div><div><h3>QA Engineer / Team Lead</h3><p class="company">GNX Solutions · India</p><ul><li>Lead QA for TalentSync, built for Muthoot Fincorp, across L&amp;D (Gurukul Classroom), Recruitment (AURA), and Candidate Portal modules.</li><li>Built a Playwright / TypeScript automation framework from scratch using Page Object Model for functional flows and security payload validation.</li><li>Traced an HRMS–PeopleStrong data-integrity issue to a department-level master-data gap affecting trainer–trainee region assignments.</li><li>Designed a JMeter load-testing plan for Keycloak OAuth and investigated a token-refresh race condition, delivering root cause analysis and regression test cases.</li><li>Designed tests for AI-generated content covering hallucinations, bias, and boundary inputs; coordinated QA resources and audited L&amp;D navigation UX.</li></ul></div></article>
+    <article class="experience" data-scan="TITLES :: 20+ SHIPPED"><div class="period"><time datetime="2022">2022</time> - <time datetime="2026-05">May 2026</time></div><div><h3>QA Test Engineer</h3><p class="company">TILTLABS · India</p><ul><li>Tested 20+ game titles and authored 4,000+ test cases for multiplayer systems, in-app purchases, VR interactions, first-time user experience, and accessibility.</li><li>Contributed to four major project launches with zero critical bugs at launch.</li><li>Specialized in AR/MR/VR testing on Meta Quest 2/3 and Apple Vision Pro, including comfort, motion sickness thresholds, and interaction testing.</li><li>Validated controller compatibility, button mapping, analog sensitivity, and input response; tested lag, disconnections, and multiplayer synchronisation.</li><li>Represented QA onsite in Singapore for a major Unreal Engine project launch and tested accessibility-focused VR experiences.</li><li>Performed web performance and security testing on game portals using PageSpeed Insights, JMeter, and OWASP ZAP.</li></ul></div></article>
+  </section>
+  <section class="section container" id="skills" aria-labelledby="skills-title">
+    <div class="section-head"><div><p class="eyebrow">05 / Expertise</p><h2 id="skills-title">The tools behind the work.</h2></div><p>A practical toolkit for exploring, reproducing, automating, and communicating quality.</p></div>
+    <div class="skills-grid">
+      <article class="skill" data-scan="STATUS :: AUTOMATED"><span class="skill-index">01 - AUTOMATE</span><h3>Automation &amp; API</h3><p>Playwright · TypeScript · Page Object Model · Swagger API testing · AutoHotKey scripting · Basic automation frameworks</p></article>
+      <article class="skill" data-scan="STATUS :: EXPLORED"><span class="skill-index">02 - INVESTIGATE</span><h3>Functional &amp; exploratory</h3><p>Regression · Smoke &amp; sanity · Integration · Black-box · Compatibility · Usability · Test case design</p></article>
+      <article class="skill" data-scan="STATUS :: VALIDATED"><span class="skill-index">03 - VALIDATE</span><h3>Performance &amp; security</h3><p>Apache JMeter · PageSpeed Insights · OWASP ZAP · XSS / SQLi testing · Load &amp; soak testing</p></article>
+      <article class="skill" data-scan="STATUS :: EXPERIENCED"><span class="skill-index">04 - EXPERIENCE</span><h3>Games &amp; immersive tech</h3><p>Gameplay &amp; FTUE · Multiplayer &amp; network QA · Controller input · VR comfort · Accessibility · Unreal Engine 5 · Unity</p></article>
+      <article class="skill" data-scan="STATUS :: COVERED"><span class="skill-index">05 - COVER</span><h3>Platforms</h3><p>Enterprise web · Keycloak OAuth · PC / Steam / Epic Games Store / Battle.net / Ubisoft Connect / GOG · Android &amp; iOS · PlayStation 4/5 · Meta Quest 2/3 · Apple Vision Pro · Roblox · Spatial</p></article>
+      <article class="skill" data-scan="STATUS :: DELIVERED"><span class="skill-index">06 - COLLABORATE</span><h3>Delivery &amp; communication</h3><p>Agile / Scrum · JIRA · Zoho CRM · Trello · Advanced Excel · Bash · Bug lifecycle &amp; RCA · LLM-assisted test design</p></article>
+    </div>
+    <div class="education"><div data-scan="LANG :: 3 SPOKEN"><strong>Languages</strong>English · Malayalam (native) · Tamil (conversational)</div></div>
+  </section>
+  <section class="section container" id="interests" aria-labelledby="interests-title">
+    <div class="section-head"><div><p class="eyebrow">06 / Beyond work</p><h2 id="interests-title">Personal interests.</h2></div><p>What I tinker with outside of testing games and platforms for a living.</p></div>
+    <div class="about-text" data-scan="INTEREST :: LOGGED"><p>An active player of <strong>PC games</strong>, with a personal habit of chasing lower input latency and higher responsiveness. I've used tools like <strong>Process Lasso</strong>, <strong>CapFrameX</strong>, and <strong>LatencyMon</strong> to tune core affinity, frame pacing, and input delay on my own PC - hands-on curiosity that mirrors the same instinct I bring to testing: dig until you understand why something feels the way it does.</p><div class="tags"><span class="tag">PC Games</span><span class="tag">Process Lasso</span><span class="tag">CapFrameX</span><span class="tag">LatencyMon</span><span class="tag">Input latency</span></div></div>
+  </section>
+  <section class="contact container" id="contact" aria-labelledby="contact-title" data-scan="CHANNEL :: OPEN">
+    <div><p class="eyebrow">07 / Let's connect</p><h2 id="contact-title">Your next release.<br>My next challenge.</h2><p>Looking for a QA engineer who can move between the details and the bigger picture? Let's talk about your team.</p></div>
+    <dl class="contact-details"><div><dt>Email</dt><dd><a href="mailto:abhilashjohny07@gmail.com">abhilashjohny07@gmail.com</a></dd></div><div><dt>Phone</dt><dd><a href="tel:+919526587704">+91 95265 87704</a></dd></div><div><dt>Based in</dt><dd>Thiruvananthapuram, India</dd></div></dl>
+  </section>
+</main>
+<footer class="container"><span>© 2026 Abhilash Johny</span><span>Thoughtful testing. Better experiences.</span><a href="#main">Back to top ↑</a></footer>
+
+<script>
+  (() => {
+    'use strict';
+    document.documentElement.classList.add('js');
+    const menuButton = document.getElementById('menu-button');
+    const navLinks = document.getElementById('nav-links');
+    const mobile = window.matchMedia('(max-width: 760px)');
+    function setMenu(open) {
+      navLinks.classList.toggle('open', open);
+      menuButton.setAttribute('aria-expanded', String(open));
+      menuButton.textContent = open ? 'Close' : 'Menu';
+    }
+    menuButton.addEventListener('click', () => setMenu(menuButton.getAttribute('aria-expanded') !== 'true'));
+    navLinks.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        if (!mobile.matches) return;
+        setMenu(false);
+        const target = document.querySelector(link.getAttribute('href'));
+        if (target) {
+          target.setAttribute('tabindex', '-1');
+          target.focus({ preventScroll: true });
+        }
+      });
+    });
+    document.addEventListener('keydown', event => {
+      if (event.key === 'Escape' && mobile.matches && navLinks.classList.contains('open')) {
+        setMenu(false);
+        menuButton.focus();
+      }
+    });
+    if (mobile.addEventListener) mobile.addEventListener('change', () => setMenu(false));
+    document.addEventListener('click', event => {
+      if (mobile.matches && !event.target.closest('.nav') && navLinks.classList.contains('open')) {
+        const focusWasInMenu = navLinks.contains(document.activeElement);
+        setMenu(false);
+        if (focusWasInMenu) menuButton.focus();
+      }
+    });
+    const filters = document.getElementById('project-filters');
+    const projects = [...document.querySelectorAll('.project[data-category]')];
+    const count = document.getElementById('project-count');
+    filters.hidden = false;
+    filters.addEventListener('click', event => {
+      const selected = event.target.closest('button[data-filter]');
+      if (!selected) return;
+      const category = selected.dataset.filter;
+      filters.querySelectorAll('button').forEach(button => button.setAttribute('aria-pressed', String(button === selected)));
+      projects.forEach(project => { project.hidden = category !== 'all' && project.dataset.category !== category; });
+      const visible = projects.filter(project => !project.hidden).length;
+      count.textContent = `${visible} selected ${visible === 1 ? 'project' : 'projects'} shown.`;
+    });
+    const motionButton = document.getElementById('motion-toggle');
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+    let motionRequested = true;
+    try { motionRequested = localStorage.getItem('portfolio-motion') !== 'off'; } catch { /* default */ }
+    function syncMotion() {
+      const enabled = motionRequested && !reducedMotion.matches;
+      document.documentElement.classList.toggle('motion-enabled', enabled && !document.hidden);
+      motionButton.hidden = reducedMotion.matches;
+      motionButton.setAttribute('aria-pressed', String(enabled));
+      motionButton.textContent = enabled ? 'Motion & effects: on' : 'Motion & effects: off';
+      document.dispatchEvent(new Event('portfolio-motion-change'));
+    }
+    motionButton.addEventListener('click', () => {
+      motionRequested = !motionRequested;
+      try { localStorage.setItem('portfolio-motion', motionRequested ? 'on' : 'off'); } catch { /* fallback */ }
+      syncMotion();
+    });
+    if (reducedMotion.addEventListener) reducedMotion.addEventListener('change', syncMotion);
+    document.addEventListener('visibilitychange', syncMotion);
+
+    /* ==========================================================================
+       NEXT-GEN INTERACTIVE CANVAS ENGINE (CYBER PARTICLES, SHOOTING DATA STREAMS,
+       HEX NODES, GLOWING CONNECTIONS, SHOCKWAVE BURSTS)
+       ========================================================================== */
+    const root = document.documentElement;
+    const finePointer = window.matchMedia('(hover: hover) and (pointer: fine)');
+    const canvas = document.getElementById('network');
+    const ctx = canvas.getContext('2d');
+    const pulseButton = document.getElementById('pulse-network');
+    const modes = document.getElementById('universe-controls');
+    
+    const palettes = {
+      enterprise: { rgb: [0, 240, 255], sec: [0, 160, 255], glyph: '✦' },
+      games: { rgb: [255, 0, 127], sec: [255, 230, 0], glyph: '▲' },
+      xr: { rgb: [185, 154, 255], sec: [0, 240, 255], glyph: '◆' }
+    };
+    const sceneLabels = {
+      enterprise: 'ENTERPRISE / CONNECTED SYSTEMS',
+      games: 'GAMES / WORLDS IN MOTION',
+      xr: 'XR / BEYOND THE SCREEN'
+    };
+    
+    let mode = 'enterprise';
+    let width = 1, height = 1;
+    let points = [], glyphs = [], streaks = [], bursts = [];
+    let frame = 0, lastTime = 0, activePanel = null;
+    const pointer = { x: -1000, y: -1000, vx: 0, vy: 0, lastX: 0, lastY: 0 };
+    const animatedReveals = new Set();
+    const canMove = () => root.classList.contains('motion-enabled');
+
+    // Deep Space Starfield & Background Interaction State
+    let synthWarpSpeed = 1.0;
+    let bgPulseAlpha = 0;
+    const stars = [];
+    const bgFlashes = [];
+    const synthSparks = [];
+    const synthLightnings = [];
+
+    function createLightning(startX, startY, targetX, targetY, branches = 2) {
+      const pts = [{ x: startX, y: startY }];
+      const dx = targetX - startX, dy = targetY - startY;
+      const dist = Math.hypot(dx, dy);
+      const steps = Math.max(5, Math.floor(dist / 26));
+      for (let i = 1; i < steps; i++) {
+        const t = i / steps;
+        pts.push({
+          x: startX + dx * t + (Math.random() - 0.5) * 45,
+          y: startY + dy * t + (Math.random() - 0.5) * 45
+        });
+      }
+      pts.push({ x: targetX, y: targetY });
+      synthLightnings.push({
+        points: pts,
+        life: 0,
+        maxLife: 0.38 + Math.random() * 0.15,
+        color: Math.random() > 0.4 ? 'rgba(0, 240, 255,' : 'rgba(255, 0, 127,'
+      });
+      if (branches > 0 && Math.random() > 0.3) {
+        const sp = pts[Math.floor(pts.length * (0.3 + Math.random() * 0.4))];
+        createLightning(sp.x, sp.y, sp.x + (Math.random() - 0.5) * 180, sp.y + Math.random() * 150, branches - 1);
+      }
+    }
+
+    function spawnSparks(x, y, count = 35) {
+      for (let i = 0; i < count; i++) {
+        const angle = Math.random() * Math.PI * 2;
+        const speed = Math.random() * 320 + 70;
+        synthSparks.push({
+          x, y,
+          vx: Math.cos(angle) * speed,
+          vy: Math.sin(angle) * speed,
+          size: Math.random() * 3.5 + 1.5,
+          life: 0,
+          maxLife: Math.random() * 0.8 + 0.45,
+          shape: Math.random() > 0.5 ? 'diamond' : 'square',
+          color: Math.random() > 0.4 ? '0, 240, 255' : (Math.random() > 0.5 ? '255, 0, 127' : '255, 230, 0')
+        });
+      }
+    }
+
+    function triggerCyberOverdrive(x, y) {
+      synthWarpSpeed = 2.4;
+      bgPulseAlpha = 0.35;
+      const pal = palettes[mode];
+      const color = pal.rgb.join(',');
+      const secColor = pal.sec.join(',');
+
+      // Background ambient resonance wave expanding across the void
+      bgFlashes.push({
+        x, y,
+        radius: 15,
+        maxRadius: Math.max(width, height) * 0.7,
+        life: 0,
+        speed: 1.4,
+        color,
+        secColor
+      });
+      if (bgFlashes.length > 5) bgFlashes.shift();
+
+      // Branching electric plasma arcs across background
+      for (let b = 0; b < 5; b++) {
+        const targetAngle = (b / 5) * Math.PI * 2 + (Math.random() - 0.5) * 0.8;
+        const targetDist = 180 + Math.random() * 260;
+        createLightning(x, y, x + Math.cos(targetAngle) * targetDist, y + Math.sin(targetAngle) * targetDist, 1);
+      }
+      spawnSparks(x, y, 36);
+    }
+
+    document.querySelectorAll('.profile-card,.project,.skill,.case-study,.archive,.experience,.metrics>div,.about-text,.education,.contact,.contact-details>div,.archive-grid>div').forEach(panel => {
+      panel.classList.add('holo');
+      const frame = document.createElement('span');
+      frame.className = 'scan-frame'; frame.setAttribute('aria-hidden', 'true');
+      panel.appendChild(frame);
+      if (panel.dataset.scan) {
+        const tag = document.createElement('span');
+        tag.className = 'scan-tag'; tag.setAttribute('aria-hidden', 'true'); tag.textContent = panel.dataset.scan;
+        panel.appendChild(tag);
+      }
+    });
+
+    document.querySelectorAll('.case-study').forEach(card => {
+      card.addEventListener('click', event => {
+        if (event.target.closest('summary')) return;
+        if (!canMove() || !ctx) return;
+        triggerShockwave(event.clientX, event.clientY);
+      });
+    });
+
+    projects.forEach(project => {
+      const art = document.createElement('div');
+      art.className = 'project-visual'; art.setAttribute('aria-hidden', 'true');
+      for (let i = 0; i < 3; i++) art.append(document.createElement('i'));
+      project.prepend(art);
+    });
+
+    function triggerShockwave(x, y, maxRadius = 350) {
+      bursts.push({ x, y, radius: 10, maxRadius, life: 0, speed: 2.2 });
+      if (bursts.length > 6) bursts.shift();
+      triggerCyberOverdrive(x, y);
+      
+      // Deflect nearby points
+      for (const p of points) {
+        const dx = p.x - x;
+        const dy = p.y - y;
+        const dist = Math.hypot(dx, dy);
+        if (dist < 260 && dist > 1) {
+          const force = (1 - dist / 260) * 65;
+          p.vx += (dx / dist) * force;
+          p.vy += (dy / dist) * force;
+        }
+      }
+    }
+
+    function resetPanel() {
+      if (activePanel) ['--px','--py'].forEach(name => activePanel.style.removeProperty(name));
+      activePanel = null;
+    }
+
+    document.addEventListener('pointermove', event => {
+      if (!canMove() || !finePointer.matches || event.pointerType === 'touch') return;
+      pointer.vx = event.clientX - pointer.x;
+      pointer.vy = event.clientY - pointer.y;
+      pointer.x = event.clientX; pointer.y = event.clientY;
+      
+      const panel = event.target.closest('.holo');
+      if (panel !== activePanel) { resetPanel(); activePanel = panel; }
+      if (panel) {
+        const rect = panel.getBoundingClientRect();
+        const x = Math.max(0, Math.min(1, (event.clientX - rect.left) / Math.max(1, rect.width)));
+        const y = Math.max(0, Math.min(1, (event.clientY - rect.top) / Math.max(1, rect.height)));
+        panel.style.setProperty('--px', `${x * 100}%`);
+        panel.style.setProperty('--py', `${y * 100}%`);
+      }
+    }, { passive: true });
+
+    function clearPointer() { pointer.x = pointer.y = -1000; resetPanel(); }
+    document.documentElement.addEventListener('pointerleave', clearPointer);
+    window.addEventListener('blur', clearPointer);
+    if (finePointer.addEventListener) finePointer.addEventListener('change', clearPointer);
+
+    function updateProgress() {
+      const distance = root.scrollHeight - window.innerHeight;
+      root.style.setProperty('--progress', distance > 0 ? Math.max(0, Math.min(1, window.scrollY / distance)) : 0);
+      clearPointer();
+    }
+    window.addEventListener('scroll', updateProgress, { passive: true });
+    filters.addEventListener('click', updateProgress);
+    document.querySelector('.archive').addEventListener('toggle', updateProgress);
+
+    /* Canvas Drawing Engine */
+    function draw(delta) {
+      if (!ctx) return;
+      ctx.clearRect(0, 0, width, height);
+      const pal = palettes[mode];
+      const color = pal.rgb.join(',');
+      const secColor = pal.sec.join(',');
+      const nowSec = performance.now() * 0.001;
+
+      // Warp speed deceleration
+      synthWarpSpeed = Math.max(1.0, synthWarpSpeed - delta * 2.2);
+
+      // Background Brightness Pulse on Click Interaction
+      if (bgPulseAlpha > 0.001) {
+        ctx.fillStyle = `rgba(${color}, ${bgPulseAlpha * 0.12})`;
+        ctx.fillRect(0, 0, width, height);
+        bgPulseAlpha = Math.max(0, bgPulseAlpha - delta * 1.5);
+      }
+
+      // 1. Deep Cosmic Nebula Glow (Breathing Bioluminescent Orbs)
+      const neb1X = width * (0.25 + Math.sin(nowSec * 0.15) * 0.05);
+      const neb1Y = height * (0.35 + Math.cos(nowSec * 0.18) * 0.05);
+      const nebGrad1 = ctx.createRadialGradient(neb1X, neb1Y, 15, neb1X, neb1Y, width * 0.55);
+      nebGrad1.addColorStop(0, `rgba(${color}, 0.07)`);
+      nebGrad1.addColorStop(0.55, `rgba(${secColor}, 0.02)`);
+      nebGrad1.addColorStop(1, 'rgba(0, 0, 0, 0)');
+      ctx.fillStyle = nebGrad1;
+      ctx.fillRect(0, 0, width, height);
+
+      const neb2X = width * (0.75 + Math.cos(nowSec * 0.12) * 0.06);
+      const neb2Y = height * (0.68 + Math.sin(nowSec * 0.16) * 0.06);
+      const nebGrad2 = ctx.createRadialGradient(neb2X, neb2Y, 15, neb2X, neb2Y, width * 0.5);
+      nebGrad2.addColorStop(0, `rgba(${secColor}, 0.06)`);
+      nebGrad2.addColorStop(1, 'rgba(0, 0, 0, 0)');
+      ctx.fillStyle = nebGrad2;
+      ctx.fillRect(0, 0, width, height);
+
+      // 2. Background Expanding Resonance Shockwaves on Click
+      for (let i = bgFlashes.length - 1; i >= 0; i--) {
+        const fl = bgFlashes[i];
+        fl.life += delta * fl.speed;
+        if (fl.life >= 1) {
+          bgFlashes.splice(i, 1);
+          continue;
+        }
+        const curR = fl.radius + Math.sin(fl.life * Math.PI * 0.5) * (fl.maxRadius - fl.radius);
+        const alpha = Math.max(0, (1 - fl.life) * 0.42);
+
+        const flashGrad = ctx.createRadialGradient(fl.x, fl.y, 0, fl.x, fl.y, curR);
+        flashGrad.addColorStop(0, `rgba(${fl.color}, ${alpha * 0.4})`);
+        flashGrad.addColorStop(0.35, `rgba(${fl.secColor}, ${alpha * 0.18})`);
+        flashGrad.addColorStop(0.7, `rgba(${fl.color}, ${alpha * 0.06})`);
+        flashGrad.addColorStop(1, 'rgba(0, 0, 0, 0)');
+
+        ctx.fillStyle = flashGrad;
+        ctx.fillRect(0, 0, width, height);
+
+        ctx.beginPath();
+        ctx.arc(fl.x, fl.y, curR, 0, Math.PI * 2);
+        ctx.strokeStyle = `rgba(${fl.color}, ${alpha * 0.5})`;
+        ctx.lineWidth = 1.6;
+        ctx.stroke();
+      }
+
+      // 3. Multi-Depth Twinkling Starfield
+      for (let i = 0; i < stars.length; i++) {
+        const s = stars[i];
+        const twinkle = Math.sin(nowSec * s.speed + s.phase);
+        const currentAlpha = Math.max(0.1, Math.min(0.95, s.baseAlpha + twinkle * 0.35));
+        ctx.fillStyle = `rgba(255, 255, 255, ${currentAlpha * 0.85})`;
+        ctx.beginPath();
+        ctx.arc(s.x, s.y, s.size, 0, Math.PI * 2);
+        ctx.fill();
+
+        if (s.size > 1.3 && currentAlpha > 0.65) {
+          ctx.strokeStyle = `rgba(${color}, ${currentAlpha * 0.35})`;
+          ctx.lineWidth = 0.6;
+          ctx.beginPath();
+          ctx.arc(s.x, s.y, s.size * 2.2, 0, Math.PI * 2);
+          ctx.stroke();
+        }
+      }
+
+      // 4. Cosmic Laser Data Streaks
+      if (Math.random() < 0.035 && streaks.length < 5) {
+        streaks.push({
+          x: Math.random() * width * 0.7,
+          y: Math.random() * height,
+          len: Math.random() * 130 + 70,
+          speed: (Math.random() * 550 + 350) * synthWarpSpeed,
+          life: 1.0,
+          angle: (Math.random() - 0.5) * 0.2
+        });
+      }
+      for (let i = streaks.length - 1; i >= 0; i--) {
+        const st = streaks[i];
+        st.x += Math.cos(st.angle) * st.speed * delta;
+        st.y += Math.sin(st.angle) * st.speed * delta;
+        st.life -= delta * 1.5;
+        if (st.life <= 0 || st.x > width + 150) {
+          streaks.splice(i, 1);
+          continue;
+        }
+        const tailX = st.x - Math.cos(st.angle) * st.len;
+        const tailY = st.y - Math.sin(st.angle) * st.len;
+        const grad = ctx.createLinearGradient(tailX, tailY, st.x, st.y);
+        grad.addColorStop(0, `rgba(${color}, 0)`);
+        grad.addColorStop(0.75, `rgba(${color}, ${st.life * 0.4})`);
+        grad.addColorStop(1, `rgba(255, 255, 255, ${st.life * 0.85})`);
+        ctx.beginPath();
+        ctx.moveTo(tailX, tailY);
+        ctx.lineTo(st.x, st.y);
+        ctx.strokeStyle = grad;
+        ctx.lineWidth = 1.6;
+        ctx.stroke();
+      }
+
+      // 5. Floating Ambient Gaming & Tech Glyphs
+      ctx.font = '11px "Space Grotesk", monospace';
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      for (let i = 0; i < glyphs.length; i++) {
+        const g = glyphs[i];
+        g.y -= g.vy * delta;
+        g.rot += g.vRot * delta;
+        if (g.y < -30) {
+          g.y = height + 30;
+          g.x = Math.random() * width;
+        }
+        ctx.save();
+        ctx.translate(g.x, g.y);
+        ctx.rotate(g.rot);
+        ctx.fillStyle = `rgba(${secColor}, ${g.opacity * 0.45})`;
+        ctx.fillText(g.symbol, 0, 0);
+        ctx.restore();
+      }
+
+      // 6. Tactical Constellation Mesh & Previous File Hover Collapse (Parting/Deflecting, NOT Combining)
+      const maxDist = 135;
+      for (let i = 0; i < points.length; i++) {
+        const p = points[i];
+        p.vx *= 0.985;
+        p.vy *= 0.985;
+        p.x = (p.x + (p.baseVx + p.vx) * delta + width) % width;
+        p.y = (p.y + (p.baseVy + p.vy) * delta + height) % height;
+
+        // Hover collapse effect from previous file (parting nodes away with laser filaments - does NOT combine)
+        if (pointer.x > 0) {
+          const distMouse = Math.hypot(p.x - pointer.x, p.y - pointer.y);
+          if (distMouse < 180) {
+            const force = (1 - distMouse / 180) * 0.45;
+            ctx.beginPath();
+            ctx.moveTo(p.x, p.y);
+            ctx.lineTo(pointer.x, pointer.y);
+            ctx.strokeStyle = `rgba(${color}, ${force * 0.75})`;
+            ctx.lineWidth = 1.2;
+            ctx.stroke();
+            p.vx += (p.x - pointer.x) * force * 1.5;
+            p.vy += (p.y - pointer.y) * force * 1.5;
+          }
+        }
+
+        // Point rendering
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+        ctx.fillStyle = p.isLead ? 'rgba(255, 255, 255, 0.9)' : `rgba(${color}, 0.85)`;
+        ctx.fill();
+
+        if (p.isLead) {
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.size * 3.2, 0, Math.PI * 2);
+          ctx.strokeStyle = `rgba(${color}, 0.35)`;
+          ctx.lineWidth = 1;
+          ctx.stroke();
+        }
+      }
+
+      // Constellation node interconnect lines
+      for (let i = 0; i < points.length; i++) {
+        for (let j = i + 1; j < points.length; j++) {
+          const a = points[i], b = points[j];
+          const dist = Math.hypot(a.x - b.x, a.y - b.y);
+          if (dist > maxDist) continue;
+          const alpha = (1 - dist / maxDist) * 0.28;
+          ctx.beginPath();
+          ctx.moveTo(a.x, a.y);
+          ctx.lineTo(b.x, b.y);
+          ctx.strokeStyle = `rgba(${color}, ${alpha})`;
+          ctx.lineWidth = 1;
+          ctx.stroke();
+        }
+      }
+
+      // 7. Branching Electric Lightning Arcs (Background Click Response)
+      for (let i = synthLightnings.length - 1; i >= 0; i--) {
+        const bolt = synthLightnings[i];
+        bolt.life += delta;
+        if (bolt.life >= bolt.maxLife) {
+          synthLightnings.splice(i, 1);
+          continue;
+        }
+        const progress = bolt.life / bolt.maxLife;
+        const alpha = Math.max(0, (1 - progress) * 0.95);
+        const pts = bolt.points;
+        if (pts.length < 2) continue;
+
+        ctx.beginPath();
+        ctx.moveTo(pts[0].x, pts[0].y);
+        for (let j = 1; j < pts.length; j++) ctx.lineTo(pts[j].x, pts[j].y);
+        ctx.strokeStyle = `${bolt.color}${alpha * 0.45})`;
+        ctx.lineWidth = 4.5;
+        ctx.stroke();
+
+        ctx.beginPath();
+        ctx.moveTo(pts[0].x, pts[0].y);
+        for (let j = 1; j < pts.length; j++) ctx.lineTo(pts[j].x, pts[j].y);
+        ctx.strokeStyle = `rgba(255, 255, 255, ${alpha})`;
+        ctx.lineWidth = 1.5;
+        ctx.stroke();
+      }
+
+      // 8. Exploding Neon Polygon Sparks (Background Click Response)
+      for (let i = synthSparks.length - 1; i >= 0; i--) {
+        const sp = synthSparks[i];
+        sp.life += delta;
+        if (sp.life >= sp.maxLife) {
+          synthSparks.splice(i, 1);
+          continue;
+        }
+        sp.x += sp.vx * delta;
+        sp.y += sp.vy * delta;
+        sp.vx *= 0.92;
+        sp.vy *= 0.92;
+        sp.vy += 60 * delta;
+
+        const prog = sp.life / sp.maxLife;
+        const alpha = Math.max(0, 1 - prog);
+
+        ctx.save();
+        ctx.translate(sp.x, sp.y);
+        ctx.fillStyle = `rgba(${sp.color}, ${alpha})`;
+        ctx.shadowColor = `rgb(${sp.color})`;
+        ctx.shadowBlur = 8;
+        if (sp.shape === 'diamond') {
+          ctx.rotate(Math.PI / 4);
+          ctx.fillRect(-sp.size / 2, -sp.size / 2, sp.size, sp.size);
+        } else {
+          ctx.fillRect(-sp.size / 2, -sp.size / 2, sp.size, sp.size);
+        }
+        ctx.restore();
+      }
+
+      // 9. Dual Shockwave Bursts
+      for (let i = bursts.length - 1; i >= 0; i--) {
+        const b = bursts[i];
+        b.life += (delta * b.speed);
+        const currentR = b.radius + b.life * (b.maxRadius - b.radius);
+        const alpha = Math.max(0, 1 - b.life);
+
+        ctx.beginPath();
+        ctx.arc(b.x, b.y, currentR, 0, Math.PI * 2);
+        ctx.strokeStyle = `rgba(${color}, ${alpha * 0.85})`;
+        ctx.lineWidth = 2.5;
+        ctx.stroke();
+
+        ctx.beginPath();
+        ctx.arc(b.x, b.y, currentR * 0.65, 0, Math.PI * 2);
+        ctx.strokeStyle = `rgba(${secColor}, ${alpha * 0.5})`;
+        ctx.lineWidth = 1.2;
+        ctx.stroke();
+
+        if (b.life >= 1) bursts.splice(i, 1);
+      }
+    }
+
+    function tick(now) {
+      frame = 0;
+      if (!canMove()) return;
+      if (now - lastTime >= 1000 / 60) {
+        const delta = lastTime ? Math.min((now - lastTime) / 1000, 0.05) : 0;
+        lastTime = now;
+        draw(delta);
+      }
+      frame = requestAnimationFrame(tick);
+    }
+
+    function resizeScene() {
+      width = window.innerWidth;
+      height = window.innerHeight;
+      const ratio = Math.min(window.devicePixelRatio || 1, 1.5);
+      canvas.width = Math.round(width * ratio);
+      canvas.height = Math.round(height * ratio);
+      if (ctx) ctx.setTransform(ratio, 0, 0, ratio, 0, 0);
+
+      // Deep Space Starfield
+      stars.length = 0;
+      const starCount = width < 760 ? 80 : 160;
+      for (let i = 0; i < starCount; i++) {
+        stars.push({
+          x: Math.random() * width,
+          y: Math.random() * height,
+          size: Math.random() * 1.8 + 0.6,
+          baseAlpha: Math.random() * 0.6 + 0.25,
+          speed: Math.random() * 2.5 + 0.8,
+          phase: Math.random() * Math.PI * 2
+        });
+      }
+
+      // Kinetic Constellation Points
+      const total = width < 760 ? 30 : 60;
+      points = Array.from({ length: total }, (_, i) => ({
+        x: Math.random() * width,
+        y: Math.random() * height,
+        baseVx: (Math.random() - 0.5) * 22,
+        baseVy: (Math.random() - 0.5) * 22,
+        vx: 0,
+        vy: 0,
+        size: 1.2 + Math.random() * 2.2,
+        isLead: i % 6 === 0
+      }));
+
+      // Ambient Gaming / Tech Glyphs
+      const glyphSymbols = ['▲', '◆', '✚', '01', 'HEX', '⚡', '⬡', '::'];
+      glyphs = Array.from({ length: 16 }, () => ({
+        x: Math.random() * width,
+        y: Math.random() * height,
+        vy: 12 + Math.random() * 20,
+        rot: Math.random() * Math.PI * 2,
+        vRot: (Math.random() - 0.5) * 1.5,
+        symbol: glyphSymbols[Math.floor(Math.random() * glyphSymbols.length)],
+        opacity: 0.2 + Math.random() * 0.4
+      }));
+
+      updateProgress();
+      draw(0);
+    }
+
+    function syncEffects() {
+      cancelAnimationFrame(frame); frame = 0; lastTime = 0;
+      clearPointer();
+      if (canMove()) frame = requestAnimationFrame(tick);
+      else { bursts = []; streaks = []; animatedReveals.forEach(animation => animation.cancel()); animatedReveals.clear(); draw(0); }
+      pulseButton.disabled = !canMove();
+    }
+
+    modes.hidden = false;
+    document.getElementById('play-hint').hidden = false;
+    
+    modes.addEventListener('click', event => {
+      const button = event.target.closest('button[data-universe]');
+      if (!button || !palettes[button.dataset.universe]) return;
+      mode = button.dataset.universe;
+      root.dataset.universe = mode;
+      modes.querySelectorAll('button').forEach(item => item.setAttribute('aria-pressed', String(item === button)));
+      document.getElementById('scene-label').textContent = sceneLabels[mode];
+      if (canMove() && ctx) triggerShockwave(width * 0.7, height * 0.45, 450);
+      draw(0);
+    });
+
+    if (ctx) pulseButton.hidden = false;
+    pulseButton.addEventListener('click', () => {
+      if (!canMove()) return;
+      triggerShockwave(width / 2, height / 2, 550);
+    });
+
+    // Click anywhere on backdrop to trigger energy ripple
+    window.addEventListener('click', (e) => {
+      if (e.target.closest('a, button, input, summary, details')) return;
+      if (canMove() && ctx) triggerShockwave(e.clientX, e.clientY, 280);
+    });
+
+    if ('IntersectionObserver' in window && Element.prototype.animate) {
+      const reveal = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if (!entry.isIntersecting) return;
+          reveal.unobserve(entry.target);
+          if (!canMove()) return;
+          const animation = entry.target.animate(
+            [{ opacity: 0.25, transform: 'translateY(30px) scale(0.98)' }, { opacity: 1, transform: 'none' }],
+            { duration: 650, easing: 'cubic-bezier(0.16, 1, 0.3, 1)' }
+          );
+          animatedReveals.add(animation);
+          animation.onfinish = animation.oncancel = () => animatedReveals.delete(animation);
+        });
+      }, { threshold: 0.08 });
+      document.querySelectorAll('.section-head,.project,.skill,.experience,.about-grid,.metrics').forEach(element => reveal.observe(element));
+    }
+
+
+    window.addEventListener('resize', resizeScene, { passive: true });
+    window.addEventListener('beforeprint', () => animatedReveals.forEach(animation => animation.cancel()));
+    document.addEventListener('portfolio-motion-change', syncEffects);
+    resizeScene();
+    syncMotion();
+  })();
+</script>
+</body>
+</html>
